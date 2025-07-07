@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('todo_from')->nullable();
             $table->foreign('todo_from')->references('id')->on('users')->onDelete('cascade');
             $table->string('lampiran')->nullable();
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
