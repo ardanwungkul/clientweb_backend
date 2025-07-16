@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NameServerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->get('user', [AuthController::class, 'getAuthenticatedUser']);
+
+    //nameserver
+    Route::apiResource('name-servers', NameServerController::class);
 
 Route::middleware('auth:api')->group(function () {
 
