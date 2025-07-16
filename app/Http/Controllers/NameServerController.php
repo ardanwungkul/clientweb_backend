@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\NameServer;
@@ -7,59 +6,68 @@ use Illuminate\Http\Request;
 
 class NameServerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+        public function index()
+        {
+            $nameServers = NameServer::all();
+            return response()->json([
+                'data' => $nameServers
+            ]);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nameserver1' => 'required|string',
+            'nameserver2' => 'required|string',
+            'tanggal_ns' => 'required|date',
+            'status_ns' => 'required|string',
+        ]);
+
+        $ns = NameServer::create($validated);
+
+        return response()->json($ns, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(NameServer $nameServer)
+    public function show($id)
     {
-        //
+        $ns = NameServer::find($id);
+        if (!$ns) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        return response()->json($ns);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(NameServer $nameServer)
+    public function update(Request $request, $id)
     {
-        //
+        $ns = NameServer::find($id);
+        if (!$ns) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+
+        $validated = $request->validate([
+            'nameserver1' => 'required|string',
+            'nameserver2' => 'required|string',
+            'tanggal_ns' => 'required|date',
+            'status_ns' => 'required|string',
+        ]);
+
+        $ns->update($validated);
+
+        return response()->json($ns);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, NameServer $nameServer)
+    public function destroy($id)
     {
-        //
-    }
+        $ns = NameServer::find($id);
+        if (!$ns) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(NameServer $nameServer)
-    {
-        //
+        $ns->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus']);
     }
 }
