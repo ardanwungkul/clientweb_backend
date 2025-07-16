@@ -35,7 +35,6 @@ Route::middleware('auth:api')->group(function () {
 
     // User
     Route::get('user', [UserController::class, 'index']);
-
-
-
+    Route::post('user', [UserController::class, 'store']);
+    Route::delete('user/{user}', [UserController::class, 'destroy']);
 });

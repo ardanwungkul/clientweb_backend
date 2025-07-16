@@ -59,6 +59,11 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'subject' => 'required',
+            'catatan' => 'required'
+        ]);
         $todo = new Todo();
         $todo->subject = $request->subject;
         $todo->catatan = $request->catatan;
