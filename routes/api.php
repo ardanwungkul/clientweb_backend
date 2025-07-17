@@ -20,10 +20,11 @@ use App\Http\Controllers\NameServerController;
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->get('user', [AuthController::class, 'getAuthenticatedUser']);
 
-    //nameserver
-    Route::apiResource('name-servers', NameServerController::class);
 
 Route::middleware('auth:api')->group(function () {
+
+    //nameserver
+    Route::apiResource('name-servers', NameServerController::class);
 
     // Todo
     Route::get('todo', [TodoController::class, 'index']);

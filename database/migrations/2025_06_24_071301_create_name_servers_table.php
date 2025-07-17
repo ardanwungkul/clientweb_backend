@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nameserver1');
             $table->string('nameserver2');
             $table->date('tanggal_ns');
-            $table->string('status_ns');
+            $table->boolean('status_ns')->default(true);
             $table->timestamps();
         });
     }
