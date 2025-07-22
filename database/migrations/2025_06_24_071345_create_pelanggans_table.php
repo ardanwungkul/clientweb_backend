@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->text('keterangan_pelanggan')->nullable();
             $table->longText('link_history')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('status', ['active', 'prospek', 'hotProspek'])->default('active');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('cascade');

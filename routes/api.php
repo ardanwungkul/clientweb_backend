@@ -5,6 +5,7 @@ use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NameServerController;
+use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,12 @@ Route::middleware('auth:api')->group(function () {
     // User
     Route::get('user', [UserController::class, 'index']);
     Route::post('user', [UserController::class, 'store']);
+    Route::put('user/{user}', [UserController::class, 'update']);
     Route::delete('user/{user}', [UserController::class, 'destroy']);
+
+    //pelanggan
+    Route::get('/pelanggan', [PelangganController::class, 'index']);
+    Route::post('/pelanggan', [PelangganController::class, 'store']);
+    Route::put('/pelanggan/{pelanggan}', [PelangganController::class, 'update']);
+    Route::delete('/pelanggan/{pelanggan}', [PelangganController::class, 'destroy']);
 });
